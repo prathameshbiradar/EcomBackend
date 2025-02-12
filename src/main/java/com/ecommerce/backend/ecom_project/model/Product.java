@@ -1,5 +1,6 @@
 package com.ecommerce.backend.ecom_project.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -22,15 +23,16 @@ public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public int id;
-    public String name;
-    public String desc;
-    public String brand;
-    public double price;
-    public String Category;
-    public Date releaseDate;
-    public boolean available;
-    public int quantity;
+    private int id;
+    private String name;
+    private String desc;
+    private String brand;
+    private double price;
+    private String Category;
+    @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "dd-MM-yyyy")
+    private Date releaseDate;
+    private boolean available;
+    private int quantity;
 
 
 }
