@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-//@CrossOrigin
+@CrossOrigin
 @RequestMapping("/api")
 public class ProductController {
     @Autowired
@@ -42,7 +42,7 @@ public class ProductController {
     }
     // Adding Product and image in databse.
     @PostMapping("/product" )
-    public ResponseEntity<?> addProduct(@RequestPart Product product, @RequestPart MultipartFile imageFile)
+    public ResponseEntity<?> addProduct(@RequestBody Product product, @RequestPart MultipartFile imageFile)
     {
         try {
             Product product1 = service.addProduct(product, imageFile);
@@ -97,4 +97,16 @@ public class ProductController {
         }
     }
 
+    @GetMapping("/products/search")
+    public ResponseEntity<List<Product>> searchProduct(@RequestPart String keyword)
+    {
+        List<Product> products = service.searchProducts(keyword);
+
+        if(products != null) {
+            return new ResponseEntity<>(products, HttpStatus.OK);
+        }
+        else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
 }
